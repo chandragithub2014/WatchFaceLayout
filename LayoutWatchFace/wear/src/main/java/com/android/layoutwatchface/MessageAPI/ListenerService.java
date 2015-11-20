@@ -18,6 +18,15 @@ public class ListenerService extends WearableListenerService {
        if(messageEvent.getPath().equals("/message_path")) {
             final String message = new String(messageEvent.getData());
             Log.d("TAG", "Received url:::" + message);
+
+           if(message.contains("reminderlist")){
+               String reminderCount = message.substring(message.lastIndexOf("$") + 1);
+               Log.d("TAG","reminderList:::"+reminderCount);
+               Intent messageIntent = new Intent();
+               messageIntent.setAction(Intent.ACTION_SEND);
+               messageIntent.putExtra("reminder", reminderCount);
+               LocalBroadcastManager.getInstance(this).sendBroadcast(messageIntent);
+           }
          /*   MobileApplication.getInstance().setMessage(message);
           if(message.equalsIgnoreCase("companion")) {
                // Bitmap bitmap  = getBitmapFromURL(message);
@@ -70,10 +79,10 @@ public class ListenerService extends WearableListenerService {
               i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
               startActivity(i);
           }
-*/         Intent messageIntent = new Intent();
+*/       /*  Intent messageIntent = new Intent();
            messageIntent.setAction(Intent.ACTION_SEND);
            messageIntent.putExtra("reminder",message);
-           LocalBroadcastManager.getInstance(this).sendBroadcast(messageIntent);
+           LocalBroadcastManager.getInstance(this).sendBroadcast(messageIntent);*/
         }else {
            super.onMessageReceived(messageEvent);
         }

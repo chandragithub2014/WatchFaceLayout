@@ -92,7 +92,11 @@ public class MessageService implements  GoogleApiClient.ConnectionCallbacks,
                         }
 */
                         /*else {*/
-                           result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/message_path", "0".getBytes()).await();
+                        if(type.equalsIgnoreCase("reminderlist")) {
+                            result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/message_path", type.getBytes()).await();
+                        }else{
+                            result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/message_path", "0".getBytes()).await();
+                        }
                      //   }
                           if(!result.getStatus().isSuccess()){
                             Log.e("test", "error");

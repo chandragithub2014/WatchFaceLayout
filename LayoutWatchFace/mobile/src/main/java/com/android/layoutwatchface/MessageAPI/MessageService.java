@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.android.layoutwatchface.Application.MobileApplication;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
@@ -91,9 +92,13 @@ public class MessageService implements  GoogleApiClient.ConnectionCallbacks,
                             Log.d("TAG","Send message when revertpatient"+"revertpatient"+"$"+MobileApplication.getInstance().getPatientRevertResponse());
                         }
 */
-                        /*else {*/
+                        if(type.equalsIgnoreCase("reminderlist")){
+                            Log.d("TAG","Send message when reminderlist");
+                            result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/message_path", ("reminderlist"+"$"+ MobileApplication.getInstance().getReminderCount()).getBytes()).await();
+                        }
+                        else {
                            result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/message_path", "20".getBytes()).await();
-                     //   }
+                        }
                           if(!result.getStatus().isSuccess()){
                             Log.e("test", "error");
                         } else {

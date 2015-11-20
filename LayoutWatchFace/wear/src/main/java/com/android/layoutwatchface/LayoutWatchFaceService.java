@@ -157,7 +157,7 @@ public class LayoutWatchFaceService extends CanvasWatchFaceService {
             MessageReceiver messageReceiver = new MessageReceiver();
             LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(messageReceiver, messageFilter);
 
-            MessageService.getInstance().startMessageService(getApplicationContext(),"");
+            MessageService.getInstance().startMessageService(getApplicationContext(),"reminderlist");
        //     DataLayerService.getInstance().startDataLayerService(getApplicationContext(), "");
         }
 
